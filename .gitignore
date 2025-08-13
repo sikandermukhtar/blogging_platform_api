@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual env
+.venv/
+
+# Environment files
+.env
+.env.*
+
+# Ruff cache
+.ruff_cache/
+
+# Alembic caches
+alembic/versions/__pycache__/
+
+# OS / editor files
+.DS_Store
+.idea/
+.vscode/
+
+routes/test.py
+seed.py
