@@ -28,6 +28,12 @@ cd blog-platform-api
 
 ### 2️⃣ Install dependencies
 
+- If you dont have poetry installed on your system
+```
+pip install poetry
+poetry --version
+```
+
 - Without dev tools (production-like)
 
 ```
