@@ -25,7 +25,7 @@ from config.base import Base
 
 target_metadata = Base.metadata
 
-database_url = os.getenv("DATABASE_URL")
+database_url = os.getenv("DATABASE_URL", "sqlite+pysqlite:///./blog_platform_api.db")
 if database_url:
     config.set_main_option("sqlalchemy.url", database_url)
 
