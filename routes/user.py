@@ -5,7 +5,8 @@ from models import User
 from utils.hashing import (
     hash_password,
     verify_password,
-    create_access_token
+    create_access_token,
+    decode_access_token
 )
 from schemas.user import UserCreate, UserRead, UserLogin, UserUpdate, UserLoginSuccess
 from utils.user import allowed_role, get_current_user
@@ -57,3 +58,29 @@ def logout_user(response: Response):
 @router.get("/me", response_model=UserRead)
 def get_me(user: UserRead = Depends(get_current_user)):
     return user
+
+@router.post("/refresh", response_model=UserLoginSuccess)
+def refresh_token(request: Request, response: Response, db: Session = Depends(get_db)):
+    
+    token = request.cookies.get("access_token")
+    if not token:
+        raise HTTPException(status_code=401, detail="No access token provided")
+
+    payload = decode_access_token(token)
+    email = payload.get("email")
+    if not email:
+        raise HTTPException(status_code=401, detail="Invalid token payload")
+
+    existing_user = db.query(User).filter(User.email == email).first()
+    if not existing_user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    new_token, max_age = create_access_token(existing_user.email, existing_user.role.role_name)
+    response.set_cookie(key="access_token", value=new_token, httponly=True, max_age=max_age)
+
+    return {
+        "user": existing_user,
+        "message": "Token refreshed",
+        "access_token": new_token,
+        "token_type": "bearer",
+    }
