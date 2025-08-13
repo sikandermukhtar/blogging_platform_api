@@ -5,7 +5,8 @@ Package management is handled with **Poetry**.
 
 ```
 Database fallback: By default, the API uses PostgreSQL (via DATABASE_URL).
-If no configuration is found, it will seamlessly switch to a local SQLite file (blog_platform_api.db) so you can run the project immediately without extra setup.
+If no configuration is found, it will seamlessly switch to a local SQLite file (blog_platform_api.db) 
+so you can run the project immediately without extra setup.
 ```
 
 ---
