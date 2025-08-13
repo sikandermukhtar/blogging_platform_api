@@ -1,7 +1,12 @@
 # Blog Platform API
 
-A FastAPI-based blog platform API with JWT authentication, Alembic migrations, and PostgreSQL support.  
+A FastAPI-based blog platform API with JWT authentication, Alembic migrations, and PostgreSQL support (API will fallback to sqlite db if postgresql configuration is missing)  
 Package management is handled with **Poetry**.
+
+```
+Database fallback: By default, the API uses PostgreSQL (via DATABASE_URL).
+If no configuration is found, it will seamlessly switch to a local SQLite file (blog_platform_api.db) so you can run the project immediately without extra setup.
+```
 
 ---
 
