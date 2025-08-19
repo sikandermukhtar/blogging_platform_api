@@ -40,6 +40,10 @@ poetry --version
 ```
 poetry install
 ```
+If poetry install doesn't work, try:
+```
+poetry install --no-root
+```
 -With dev tools (ruff for formatting)
 ```
 poetry install --with dev
